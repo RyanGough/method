@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang=en>
+    <head>
+        <meta charset=utf-8>
+        <title>The Method</title>
+        <link rel="stylesheet" type="text/css" href="./mermaid.css">
+        <script src="./mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    </head>
+    <body>
+        <div class="mermaid">
+            graph TD 
+                wantStart{do you want to build some software<br>to solve a problem?};
+                wantStart-->|no|dontStart
+                wantStart-->|yes|haveTeam
+                dontStart[ok then!];
+
+                haveTeam{do you have a team?}
+                haveTeam-->|no|makeTeam
+                haveTeam-->|yes|understand
+                makeTeam[get a team, 1-5 people, appropriate skills<br>aim for diversity apart from they should all be nice]
+                makeTeam-->understand
+
+                understand{do the team understand<br>the problem you're trying to solve?}
+                understand-->|no|tryUnderstand
+                understand-->|yes|buildSkeleton
+                tryUnderstand-->buildSkeleton
+                tryUnderstand[team should work with users / stakeholders<br>until they understand the problem and vision of the solution]
+                buildSkeleton[team build software skeleton including the build system,<br>test framework, CI pipeline, monitoring, etc as required]
+                buildSkeleton-->nextFeature
+
+                nextFeature{do you need to make a change<br>such as add a feature or improve the skeleton?}
+                nextFeature-->|no|featureComplete
+                nextFeature-->|yes|featureCheck
+                featureCheck{is this the most important thing to do now?}
+                featureCheck-->|yes|designFeature
+                featureCheck-->|no, let me think again|nextFeature
+                designFeature[this is where whoever is working on the feature thinks hard about it<br>does some design work, talks to people etc.]
+                designFeature-->buildFeature
+                buildFeature[do the thing. and do it properly, with tests<br>and appropriate documentation and whatnot.<br>and don't forget to refactor.]
+                buildFeature-->bugCheck
+
+                bugCheck{does the software have any bugs?}
+                bugCheck-->|no|nextFeature
+                bugCheck-->|yes|fixBugs
+                fixBugs[fix 'em]
+                fixBugs-->nextFeature
+                featureComplete[you're done - go and find a new problem!]
+        </div>
+    </body>
+</html>
