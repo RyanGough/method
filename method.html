@@ -10,34 +10,52 @@
     <body>
         <div class="mermaid">
             graph TD 
-                wantStart{do you want to build some software<br>to solve a problem?};
-                wantStart-->|no|dontStart
-                wantStart-->|yes|haveTeam
-                dontStart[ok then!];
+                haveProblem{do you have<br/>a problem that needs<br/>to be solved?}
+                haveProblem-->|no|noProblem
+                haveProblem-->|yes|wantStart
+                
+                noProblem[check again];
+                noProblem-->haveProblem
+
+                wantStart{is there any way<br/>to solve this problem<br/>without software?};
+                wantStart-->|yes|dontStart
+                wantStart-->|no|wantBuild
+                dontStart[do that];
+
+                wantBuild{can you use software<br/>that already exists<br/>without firing<br/>all your staff?}
+                wantBuild-->|no|dontStart
+                wantBuild-->|yes|reallyNeedFix
+
+                reallyNeedFix{are you sure<br/>you need to fix<br/>this problem?}
+                reallyNeedFix-->|yes|haveTeam
+                reallyNeedFix-->|maybe not|liveWithIt
+
+                liveWithIt[live with it]
+                liveWithIt-->haveProblem
 
                 haveTeam{do you have a team?}
                 haveTeam-->|no|makeTeam
                 haveTeam-->|yes|understand
-                makeTeam[get a team, 1-5 people, appropriate skills<br>aim for diversity apart from they should all be nice]
+                makeTeam[get a team, 1-5 people, appropriate skills<br/>aim for diversity apart from they should all be nice]
                 makeTeam-->understand
 
-                understand{do the team understand<br>the problem you're trying to solve?}
+                understand{do the team understand<br/>the problem you're trying to solve?}
                 understand-->|no|tryUnderstand
                 understand-->|yes|buildSkeleton
                 tryUnderstand-->buildSkeleton
-                tryUnderstand[team should work with users / stakeholders<br>until they understand the problem and vision of the solution]
-                buildSkeleton[team build software skeleton including the build system,<br>test framework, CI pipeline, monitoring, etc as required]
+                tryUnderstand[team should work with users / stakeholders<br/>until they understand the problem and vision of the solution]
+                buildSkeleton[team build software skeleton including the build system,<br/>test framework, CI pipeline, monitoring, etc as required]
                 buildSkeleton-->nextFeature
 
-                nextFeature{do you need to make a change<br>such as add a feature or improve the skeleton?}
+                nextFeature{do you need to make a change<br/>such as add a feature or improve the skeleton?}
                 nextFeature-->|no|featureComplete
                 nextFeature-->|yes|featureCheck
                 featureCheck{is this the most important thing to do now?}
                 featureCheck-->|yes|designFeature
                 featureCheck-->|no, let me think again|nextFeature
-                designFeature[this is where whoever is working on the feature thinks hard about it<br>does some design work, talks to people etc.]
+                designFeature[this is where whoever is working on the feature thinks hard about it<br/>does some design work, talks to people etc.]
                 designFeature-->buildFeature
-                buildFeature[do the thing. and do it properly, with tests<br>and appropriate documentation and whatnot.<br>and don't forget to refactor.]
+                buildFeature[do the thing. and do it properly, with tests<br/>and appropriate documentation and whatnot.<br/>and don't forget to refactor.]
                 buildFeature-->bugCheck
 
                 bugCheck{does the software have any bugs?}
