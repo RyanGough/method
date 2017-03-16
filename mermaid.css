@@ -254,6 +254,9 @@ text.actor {
 
 
 */
+.node {
+  text-align: center;
+}
 .node text {
   font-family: 'trebuchet ms', verdana, arial;
   font-size: 14px;
